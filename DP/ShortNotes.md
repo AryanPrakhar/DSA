@@ -25,8 +25,36 @@ Transformation: Count subsets with sum (target + total_sum)/2<br />
 Note: Using dp[i] (not dp[i-1]) when including item<br />
 ### 7. Coin Change (Ways)<br />
 **Problem**: Count ways to make change using given coins <br />
-**Recurrence**: ```dp[i][j] = dp[i-1][j] + dp[i][j-coins[i-1]]``` <br />
-### 8. Coin Change (Minimum) <br />
-**Problem**: Minimum coins needed for change <br />
-**Recurrence**: ```dp[i][j] = min(dp[i-1][j], 1 + dp[i][j-coins[i-1]])``` <br />
+**Recurrence**: ```
+dp[i][j] = dp[i-1][j] + dp[i][j-coins[i-1]]``` <br />
+
+---
+
+### 8. Coin Change (Minimum)
+
+**Problem**: Minimum coins needed for change
+**Recurrence**:
+
+```cpp
+// base case
+for(int j = 1; j <= amount; j++) 
+    t[0][j] = INT_MAX - 1;
+
+for(int i = 0; i <= n; i++) 
+    t[i][0] = 0;
+
+for(int j = 1; j <= amount; j++) {
+    if (j % coins[0] == 0) 
+        t[1][j] = j / coins[0];
+    else 
+        t[1][j] = INT_MAX - 1;
+}
+
+// recurrence
+dp[i][j] = min(dp[i - 1][j], 1 + dp[i][j - coins[i - 1]]);
+```
+
+---
+
+
 
